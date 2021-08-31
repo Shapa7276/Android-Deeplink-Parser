@@ -32,7 +32,6 @@
 ------------------------------------com.lol.test.LaunchActivity----------------------------------------------
 
 https://example.lol.com/test
-fbconnect://test
 lol://lol
 word://
 ```
