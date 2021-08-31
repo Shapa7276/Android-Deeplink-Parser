@@ -1,6 +1,6 @@
 # Android-Deeplink-Parser
 
-## This Script can be used to Parse the AndroidManifest.xml and Strings.xml to List the all deeplinks in activity 
+## This Script can be used to Parse the AndroidManifest.xml and Strings.xml to List the all deeplinks of the android application 
 
 
 ![Alt Text](https://github.com/Shapa7276/Android-Deeplink-Parser/blob/main/Animation.gif)
