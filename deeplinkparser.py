@@ -36,10 +36,11 @@ def deeplink():
 	for activity in activities:
 		intentFilterTag = activity.getElementsByTagName("intent-filter")
 		if len(intentFilterTag) > 0:
+			print("\n------------------------------------"+activity.attributes["android:name"].value+"----------------------------------------------\n")
 			for intent in intentFilterTag:
 				dataTag = intent.getElementsByTagName("data")
 				if len(dataTag) > 0:
-					print("------------------------------------"+activity.attributes["android:name"].value+"----------------------------------------------\n")
+					#print("------------------------------------"+activity.attributes["android:name"].value+"----------------------------------------------\n")
 
 					#calladb(str(activity.attributes["android:name"].value),package_name)
 					for data in dataTag:
