@@ -7,7 +7,7 @@
 
 # Example 
 
-```Java
+```XML
      <activity android:theme="@style/Theme.lolSplashBackground" android:name="com.lol.test.LaunchActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
