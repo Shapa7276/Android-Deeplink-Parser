@@ -38,9 +38,9 @@ word://
 
 # Installation
 ```
-Download Jadx from https://github.com/skylot/jadx
+Install the apktool 
+sudo apt-get install apktool
 git clone https://github.com/Shapa7276/Android-Deeplink-Parser.git
-Update the path of jadx in "deeplinkparser.py" on line number 160
 Run below command with apk file as input 
 python3 deeplinkparser.py facebook.apk
 ```
