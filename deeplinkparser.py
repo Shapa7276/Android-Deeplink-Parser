@@ -1,4 +1,5 @@
 from xml.dom.minidom import parseString
+
 import xml.dom.minidom,os
 import subprocess,time,sys
 
@@ -155,13 +156,47 @@ def deeplink(out):
 				c=[]
 
 
+def exported(out):
+	data = ''
+	with open(out+'/AndroidManifest.xml','r') as f:
+		data = f.read()
+	
+	dom = parseString(data)
+	activities = (dom.getElementsByTagName('activity')+dom.getElementsByTagName('activity-alias'))
+	receivers=dom.getElementsByTagName('receiver')
+	providers=dom.getElementsByTagName('provider')
+	services=dom.getElementsByTagName('service')
+	print("\n----------------------------------Exported Activities------------------------------------------------\n")
+	for activity in activities:
+		if(activity.hasAttribute("android:exported")):
+			if(str(activity.attributes["android:exported"].value)=='true'):
+				print(activity.attributes["android:name"].value)
+		
+	print("\n----------------------------------Exported Receiver ------------------------------------------------\n")
+	for receiver in receivers:
+		if(receiver.hasAttribute("android:exported")):
+			if(str(receiver.attributes["android:exported"].value)=='true'):
+				print(receiver.attributes["android:name"].value)
 
+	print("\n----------------------------------Exported provider ------------------------------------------------\n")
+	for provider in providers:
+		if(provider.hasAttribute("android:exported")):
+			if(str(provider.attributes["android:exported"].value)=='true'):
+				print(provider.attributes["android:name"].value)
 
-
+	print("\n----------------------------------Exported Services ------------------------------------------------\n")
+	for service in services:
+		if(service.hasAttribute("android:exported")):
+			if(str(service.attributes["android:exported"].value)=='true'):
+				print(service.attributes["android:name"].value)
+	
+	
+	print("\n----------------------------------END ------------------------------------------------\n")
 apk=sys.argv[1]
 apk=os.path.basename(apk)
 out=apk.rsplit(".",1)[0].replace(' ','_')
 cmd="apktool d "+sys.argv[1]+" -o "+out
 print(cmd)
 os.system(cmd)
-deeplink(out)
+#deeplink(out)
+exported(out)
