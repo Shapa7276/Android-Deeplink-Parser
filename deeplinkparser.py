@@ -1,12 +1,11 @@
 from xml.dom.minidom import parseString
-
 import xml.dom.minidom,os
 import subprocess,time,sys
 
 
 def strdomvalue(name):
 	strdata = ''
-	with open('out/resources/res/values/strings.xml','r') as f:
+	with open(out+'/res/values/strings.xml','r',encoding="utf8") as f:
 		strdata = f.read()
 	strdom = parseString(strdata)
 	strings = (strdom.getElementsByTagName('string'))
@@ -17,11 +16,11 @@ def strdomvalue(name):
 		 			return (node.data)
 
 
-def deeplink():
+def deeplink(out):
 	data = ''
-	with open('out/resources/AndroidManifest.xml','r') as f:
+	with open(out+'/AndroidManifest.xml','r') as f:
 	    data = f.read()
-	a = [] 
+	a = []
 	b= []
 	c= []
 	d= []
@@ -36,7 +35,9 @@ def deeplink():
 	for activity in activities:
 		intentFilterTag = activity.getElementsByTagName("intent-filter")
 		if len(intentFilterTag) > 0:
-			print("\n------------------------------------"+activity.attributes["android:name"].value+"----------------------------------------------\n")
+			print("\n----------------------------------------------------------------------------------\n")
+			print("\t\t    "+activity.attributes["android:name"].value)
+			print("\n----------------------------------------------------------------------------------\n")
 			for intent in intentFilterTag:
 				dataTag = intent.getElementsByTagName("data")
 				if len(dataTag) > 0:
@@ -59,7 +60,7 @@ def deeplink():
 								three=str(data.attributes["android:pathPrefix"].value)
 							print(one+"://"+two+three)
 							#callhttpdeep(str(one+"://"+two+three),package_name)
-							
+
 						if (data.attributes.length==3 and data.hasAttribute("android:pathPattern")) :
 							if "@string" in (str(data.attributes["android:scheme"].value)):
 								one=strdomvalue(str(data.attributes["android:scheme"].value))
@@ -87,7 +88,7 @@ def deeplink():
 								three=strdomvalue(str(data.attributes["android:path"].value))
 							else:
 								three=str(data.attributes["android:path"].value)
-							print(one+"://"+two+three)						
+							print(one+"://"+two+three)
 						if (data.attributes.length==2 and (data.hasAttribute("android:host")and data.hasAttribute("android:scheme"))) :
 							if "@string" in (str(data.attributes["android:scheme"].value)):
 								one=strdomvalue(str(data.attributes["android:scheme"].value))
@@ -111,18 +112,18 @@ def deeplink():
 								d.append(str(data.attributes["android:pathPattern"].value))
 							if data.hasAttribute("android:path"):
 								d.append(str(data.attributes["android:path"].value))
-								
-							
-					
+
+
+
 				for scheme in c:
 					if b==[]:
 						if "@string" in (str(scheme)):
 								print(strdomvalue(str(scheme))+"://")
 						else:
 								print(str(scheme)+"://")
-						 
 
-					for host in b:		
+
+					for host in b:
 						if d==[]:
 							if "@string" in (scheme):
 								one=strdomvalue(scheme)
@@ -147,17 +148,20 @@ def deeplink():
 							else:
 								three=str(path)
 							print(one+"://"+two+three)
-						
-						
-				a=[]	
-				b=[]                  
+
+
+				a=[]
+				b=[]
 				c=[]
 
 
 
-                  
 
 
-cmd="/home/shapa/tools/jadx/bin/jadx -d out "+sys.argv[1]	
+apk=sys.argv[1]
+apk=os.path.basename(apk)
+out=apk.rsplit(".",1)[0].replace(' ','_')
+cmd="apktool d "+sys.argv[1]+" -o "+out
+print(cmd)
 os.system(cmd)
-deeplink()
+deeplink(out)
