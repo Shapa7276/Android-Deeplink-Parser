@@ -198,5 +198,5 @@ out=apk.rsplit(".",1)[0].replace(' ','_')
 cmd="apktool d "+sys.argv[1]+" -o "+out
 print(cmd)
 os.system(cmd)
-#deeplink(out)
+deeplink(out)
 exported(out)
