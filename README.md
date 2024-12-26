@@ -1,9 +1,28 @@
 # Android-Deeplink-Parser
 
-## This Script can be used to Parse the AndroidManifest.xml and Strings.xml to List the all deeplinks of the android application 
+## This Script to Parse the APK file to List the all deeplinks of the android application 
 
+```
+usage: deeplinkparser.py [-h] -a APK [-f] [-o OUTPUT]
 
-![Alt Text](https://github.com/Shapa7276/Android-Deeplink-Parser/blob/main/Animation.gif)
+Android APK Deeplink Scanner
+
+options:
+  -h, --help           show this help message and exit
+  -a, --apk APK        Path to the APK file to analyze
+  -f, --force          Force rescan even if results already exist
+  -o, --output OUTPUT  Custom output directory for results (default: scan_results)
+
+Examples:
+  python script.py -a path/to/app.apk
+  python script.py --apk app.apk
+  python script.py -a app.apk --force  # Force rescan even if results exist
+```
+# Output saved in html format 
+![Alt Text](html_report.png)
+
+![Alt Text](Animation.gif)
+
 
 # Example 
 
@@ -42,7 +61,7 @@ Install the apktool
 sudo apt-get install apktool
 git clone https://github.com/Shapa7276/Android-Deeplink-Parser.git
 Run below command with apk file as input 
-python3 deeplinkparser.py facebook.apk
+python3 deeplinkparser.py -a facebook.apk
 ```
 
 # Reference 
